@@ -20,13 +20,14 @@ export class AboutPage {
 
   private loadNews(source: string) {
     let loadingUI = this.loader.create({
-      content: "Please wait",
+      content: "Please wait ... your paper will arrive shortly.",
     });
 
     loadingUI.present();
     this.newsService.getNews(source).then(data => {
       this.data = data;
       loadingUI.dismiss();
+
     });
   }
 }
