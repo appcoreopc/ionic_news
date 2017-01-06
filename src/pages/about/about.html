@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      News
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card *ngFor="let item of data">
+    <img src="{{item.picture.large}}" />
+    <ion-card-content>
+      <ion-card-title>
+        {{item.name.first}}, {{item.name.last}}
+      </ion-card-title>
+      <p>
+        dob: {{item.dob}},email : {{item.email}}, cell : {{item.cell}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
