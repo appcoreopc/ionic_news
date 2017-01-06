@@ -13,20 +13,35 @@ export class NewsService {
 
   _http: Http
   _data: any;
+  _apiUrl : string = "https://newsapi.org/v1/articles?apiKey=22f66588d55e4db88dabda8f03aa598c&source="; 
+  _url : string; 
+  _source : string = "";
 
   constructor(public http: Http) {
     this._http = http;
   }
 
-  getNews(url: string) {
-    if (this._data) {
-      return Promise.resolve(this._data);
-    }
+  refresh() { 
+    return this.getNews(this._url);
+  }
 
+  getNews(source: string) {
+    
+    if (this._source == source)
+    {
+      if (this._data) {
+        return Promise.resolve(this._data);
+      }
+    }
+    
+    // fetching different source //
+    this._source = source;
+    this._url = this._apiUrl + source;
+    
     return new Promise(resolve => {
-      this._http.get(url).map(x => x.json()).subscribe(data => {
-        this._data = data.results;
-        console.log(data);
+      this._http.get(this._url).map(x => x.json()).subscribe(data => {
+        this._data = data.articles;
+        console.log(this._data);
         resolve(this._data);
       })
     });

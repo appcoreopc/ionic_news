@@ -5,20 +5,28 @@ import { NavController, LoadingController } from 'ionic-angular';
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html',
-  providers : [NewsService]
+  providers: [NewsService]
 })
 export class AboutPage {
+  data: any;
 
-data : any; 
+  constructor(public navCtrl: NavController, public newsService: NewsService, public loader: LoadingController) {
+    this.loadNews("techcrunch");
+  }
 
-  constructor(public navCtrl: NavController, public newsService: NewsService, public loader : LoadingController) {
-    let loading = loader.create({
-      content : "Please wait",
+  getNews(source: string) {
+    this.loadNews(source);
+  }
+
+  private loadNews(source: string) {
+    let loadingUI = this.loader.create({
+      content: "Please wait",
     });
 
-    loading.present();
-    this.newsService.getNews("https://randomuser.me/api/?results=10").then(data => 
-    this.data = data);
-    loading.dismiss();
-    }
+    loadingUI.present();
+    this.newsService.getNews(source).then(data => {
+      this.data = data;
+      loadingUI.dismiss();
+    });
+  }
 }
