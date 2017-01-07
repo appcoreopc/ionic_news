@@ -12,4 +12,8 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
 
   }
+  
+  configureNews() {
+    console.log("configuring news");
+  }
 }
