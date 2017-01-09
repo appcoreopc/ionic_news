@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NewsService } from '../../providers/news-service';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, NavParams } from 'ionic-angular';
 import { CategoryPage } from '../category/category';
 
 @Component({
@@ -11,15 +11,27 @@ import { CategoryPage } from '../category/category';
 export class AboutPage {
   data: any;
 
-  constructor(public navCtrl: NavController, private newsService: NewsService, private loader: LoadingController) {
-    this.loadNews("techcrunch");
+  constructor(private navCtrl: NavController, private newsService: NewsService, private loader: LoadingController,
+    private navParams: NavParams) {
+    console.log("navParams");
+
+    if (this.navParams && this.navParams) {
+      if (typeof this.navParams.data == "string") {
+        let source = <string>(this.navParams.data);
+        console.log(source);
+        this.loadNews(source);
+      }
+      else {
+        this.loadNews("techcrunch");
+      }
+    }
   }
 
   getNews(source: string) {
     this.loadNews(source);
   }
 
-  showCategory() { 
+  showCategory() {
     this.navCtrl.push(CategoryPage);
 
   }

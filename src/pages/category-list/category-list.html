@@ -15,7 +15,7 @@
     <ion-avatar item-left>
       <img src="{{item.urlsToLogos.small}}">
     </ion-avatar>
-    <h2>{{item.name}}</h2>
+    <h2 (click)="loadNews(item.id)">{{item.name}}</h2>
     <p>{{item.description}}</p>
 
   </ion-item>
