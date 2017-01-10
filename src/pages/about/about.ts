@@ -44,7 +44,6 @@ export class AboutPage {
     loadingUI.present();
     this.newsService.getNews(source).then(data => {
       this.data = data;
-      console.log(this.data);
       loadingUI.dismiss();
 
     });

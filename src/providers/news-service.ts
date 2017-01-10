@@ -41,7 +41,6 @@ export class NewsService {
     return new Promise(resolve => {
       this._http.get(this._url).map(x => x.json()).subscribe(data => {
         this._data = data.articles;
-        console.log(this._data);
         resolve(this._data);
       })
     });
