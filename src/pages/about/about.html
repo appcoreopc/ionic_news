@@ -19,10 +19,10 @@
   <ion-card *ngFor="let item of data">
     <img src="{{item.urlToImage}}" />
     <ion-card-content>
-      <ion-card-title>
+      <ion-card-title (click)="launchNews(item.url)">
         {{item.title}}
       </ion-card-title>
-      <p>
+      <p (click)="launchNews(item.url)">
         {{item.description}}
       </p>
     </ion-card-content>

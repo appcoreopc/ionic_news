@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NewsService } from '../../providers/news-service';
-import { NavController, LoadingController, NavParams } from 'ionic-angular';
+import { NavController, LoadingController, NavParams, Platform } from 'ionic-angular';
 import { CategoryPage } from '../category/category';
+import { InAppBrowser } from 'ionic-native';
 
 @Component({
   selector: 'page-about',
@@ -10,10 +11,10 @@ import { CategoryPage } from '../category/category';
 })
 export class AboutPage {
   data: any;
+  defaultUrl: string = "techcrunch";
 
   constructor(private navCtrl: NavController, private newsService: NewsService, private loader: LoadingController,
-    private navParams: NavParams) {
-    console.log("navParams");
+    private navParams: NavParams, private platform: Platform) {
 
     if (this.navParams && this.navParams) {
       if (typeof this.navParams.data == "string") {
@@ -22,7 +23,7 @@ export class AboutPage {
         this.loadNews(source);
       }
       else {
-        this.loadNews("techcrunch");
+        this.loadNews(this.defaultUrl);
       }
     }
   }
@@ -33,7 +34,6 @@ export class AboutPage {
 
   showCategory() {
     this.navCtrl.push(CategoryPage);
-
   }
 
   private loadNews(source: string) {
@@ -44,8 +44,17 @@ export class AboutPage {
     loadingUI.present();
     this.newsService.getNews(source).then(data => {
       this.data = data;
+      console.log(this.data);
       loadingUI.dismiss();
 
     });
+  }
+
+  launchNews(url: string) {
+    let options = 'location=no,toolbar=yes,hidden=no';
+    let browser = new InAppBrowser(url, '_blank', options);
+
+    //if (!this.platform.is("mobileweb"))
+    //    browser.show();
   }
 }
