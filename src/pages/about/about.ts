@@ -3,6 +3,7 @@ import { NewsService } from '../../providers/news-service';
 import { NavController, LoadingController, NavParams, Platform } from 'ionic-angular';
 import { CategoryPage } from '../category/category';
 import { InAppBrowser } from 'ionic-native';
+import { Push, PushToken } from '@ionic/cloud-angular';
 
 @Component({
   selector: 'page-about',
@@ -14,8 +15,22 @@ export class AboutPage {
   defaultUrl: string = "techcrunch";
 
   constructor(private navCtrl: NavController, private newsService: NewsService, private loader: LoadingController,
-    private navParams: NavParams, private platform: Platform) {
+    private navParams: NavParams, private platform: Platform, private push: Push) {
 
+/*
+    this.push.register().then((t: PushToken) => {
+      console.log("push token stage");
+      return this.push.saveToken(t);
+    }).then((t: PushToken) => {
+      console.log('Token saved:', t.token);
+    });
+
+    this.push.rx.notification()
+      .subscribe((msg) => {
+        alert(msg.title + ': ' + msg.text);
+      });
+
+*/
     if (this.navParams && this.navParams) {
       if (typeof this.navParams.data == "string") {
         let source = <string>(this.navParams.data);
