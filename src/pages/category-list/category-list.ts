@@ -22,8 +22,6 @@ export class CategoryListPage {
     this.loadCategory();
   }
 
-  
-
   private loadNews(source : string)
   {
     this.navCtrl.push(AboutPage, source);
@@ -31,7 +29,7 @@ export class CategoryListPage {
 
   private loadCategory() {
 
-    this.loadNews("test");
+    //this.loadNews("test");
 
     this.navParams.data;
     let source = <string>this.navParams.data;

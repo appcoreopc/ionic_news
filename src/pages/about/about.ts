@@ -13,26 +13,26 @@ import { Push, PushToken } from '@ionic/cloud-angular';
 export class AboutPage {
   data: any;
   defaultUrl: string = "techcrunch";
+  registrationInProgress: boolean = false;
+
 
   constructor(private navCtrl: NavController, private newsService: NewsService, private loader: LoadingController,
-    private navParams: NavParams, private platform: Platform) {
+    private navParams: NavParams, private platform: Platform, private push: Push) {
 
-    //private push: Push
+    // if (this.registrationInProgress == false) {
+    //   this.push.register().then((t: PushToken) => {
+    //     console.log("push token stage");
+    //     return this.push.saveToken(t);
+    //   }).then((t: PushToken) => {
+    //     console.log('Token saved:', t.token);
+    //   });
 
-    /*
-        this.push.register().then((t: PushToken) => {
-          console.log("push token stage");
-          return this.push.saveToken(t);
-        }).then((t: PushToken) => {
-          console.log('Token saved:', t.token);
-        });
-    
-        this.push.rx.notification()
-          .subscribe((msg) => {
-            alert(msg.title + ': ' + msg.text);
-          });
-    
-    */
+    //   this.push.rx.notification()
+    //     .subscribe((msg) => {
+    //       alert(msg.title + ': ' + msg.text);
+    //     });
+    // }
+
     if (this.navParams && this.navParams) {
       if (typeof this.navParams.data == "string") {
         let source = <string>(this.navParams.data);
