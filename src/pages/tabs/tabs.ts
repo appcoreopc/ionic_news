@@ -35,6 +35,7 @@ export class TabsPage {
         this.push.rx.notification()
           .subscribe((msg) => {
             alert(msg.title + ': ' + msg.text);
+            console.log("message arrived!!!!!" + msg);
           });
       }
 
