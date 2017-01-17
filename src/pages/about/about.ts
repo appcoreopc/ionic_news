@@ -17,21 +17,7 @@ export class AboutPage {
 
 
   constructor(private navCtrl: NavController, private newsService: NewsService, private loader: LoadingController,
-    private navParams: NavParams, private platform: Platform, private push: Push) {
-
-    // if (this.registrationInProgress == false) {
-    //   this.push.register().then((t: PushToken) => {
-    //     console.log("push token stage");
-    //     return this.push.saveToken(t);
-    //   }).then((t: PushToken) => {
-    //     console.log('Token saved:', t.token);
-    //   });
-
-    //   this.push.rx.notification()
-    //     .subscribe((msg) => {
-    //       alert(msg.title + ': ' + msg.text);
-    //     });
-    // }
+    private navParams: NavParams) {
 
     if (this.navParams && this.navParams) {
       if (typeof this.navParams.data == "string") {
@@ -67,8 +53,8 @@ export class AboutPage {
   }
 
   launchNews(url: string) {
-    //let options = 'location=no,toolbar=yes,hidden=no';
-    //let browser = new InAppBrowser(url, '_blank', options);
+    let options = 'location=no,toolbar=yes,hidden=no';
+    let browser = new InAppBrowser(url, '_blank', options);
     //if (!this.platform.is("mobileweb"))
     //    browser.show();
   }

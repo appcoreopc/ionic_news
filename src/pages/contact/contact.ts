@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FileTransferService } from '../../providers/FileTransferService'
 import { Http, Headers, RequestOptions } from '@angular/http';
+import {PayPal, PayPalPayment, PayPalConfiguration} from "ionic-native";
+
 
 @Component({
   selector: 'page-contact',
