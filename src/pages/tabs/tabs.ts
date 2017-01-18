@@ -24,21 +24,19 @@ export class TabsPage {
 
     this.platform.ready().then(source => {
       console.log("platform ready" + source);
-      if (this.registrationInProgress == false) {
-        this.push.register().then((t: PushToken) => {
-          console.log("push token stage");
-          return this.push.saveToken(t);
-        }).then((t: PushToken) => {
-          console.log('Token saved:', t.token);
+
+      this.push.register().then((t: PushToken) => {
+        console.log("push token stage");
+        return this.push.saveToken(t);
+      }).then((t: PushToken) => {
+        console.log('Token saved:', t.token);
+      });
+
+      this.push.rx.notification()
+        .subscribe((msg) => {
+          alert(msg.title + ': ' + msg.text);
+          console.log("message arrived!!!!!" + msg);
         });
-
-        this.push.rx.notification()
-          .subscribe((msg) => {
-            alert(msg.title + ': ' + msg.text);
-            console.log("message arrived!!!!!" + msg);
-          });
-      }
-
     });
   }
 }
