@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-
 import { HomePage } from '../home/home';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
-
 import { NavController, LoadingController, NavParams, Platform } from 'ionic-angular';
 import { InAppBrowser } from 'ionic-native';
-import { Push, PushToken } from '@ionic/cloud-angular';
-
+import { Push, PushToken, Deploy } from '@ionic/cloud-angular';
+import { ApplicationUpdateService } from '../../providers/applicationUpdateService';
+import { NotificationService } from '../../providers/notificationService';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -20,23 +19,12 @@ export class TabsPage {
   tab3Root: any = ContactPage;
   private registrationInProgress: boolean;
 
-  constructor(private platform: Platform, private push: Push) {
+  constructor(private platform: Platform, private push: Push,
+    private deploy: Deploy) {
 
-    this.platform.ready().then(source => {
-      console.log("platform ready" + source);
-
-      this.push.register().then((t: PushToken) => {
-        console.log("push token stage");
-        return this.push.saveToken(t);
-      }).then((t: PushToken) => {
-        console.log('Token saved:', t.token);
-      });
-
-      this.push.rx.notification()
-        .subscribe((msg) => {
-          alert(msg.title + ': ' + msg.text);
-          console.log("message arrived!!!!!" + msg);
-        });
-    });
+    // Register Push notification service
+    new NotificationService(this.platform, this.push).registerPushNotification();
+    // Application Update
+    new ApplicationUpdateService(deploy).appUpdate();
   }
 }

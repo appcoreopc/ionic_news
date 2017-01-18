@@ -3,7 +3,6 @@ import { NewsService } from '../../providers/news-service';
 import { NavController, LoadingController, NavParams, Platform } from 'ionic-angular';
 import { CategoryPage } from '../category/category';
 import { InAppBrowser } from 'ionic-native';
-import { Push, PushToken } from '@ionic/cloud-angular';
 
 @Component({
   selector: 'page-about',
@@ -55,7 +54,5 @@ export class AboutPage {
   launchNews(url: string) {
     let options = 'location=no,toolbar=yes,hidden=no';
     let browser = new InAppBrowser(url, '_blank', options);
-    //if (!this.platform.is("mobileweb"))
-    //    browser.show();
   }
 }
